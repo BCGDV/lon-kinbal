@@ -1,0 +1,11 @@
+**Introduction**
+
+As we iterate on our fundamental customer value proposition of BBaas (Business building as a service) to working closely with clients on creating innovation 'inside their firewall' with mixed client-DV teams - it is of fundamental importance to the business to launch ventures with technologies that are scalable, maintainable and most importantly compliant. Previous microenterprise ventures with close client-DV collaboration have led to the discovery of opportunity areas within the kickoff phase of these ventures that could significantly reduce boot times, increase organisational code re-usability and provide a consistent technological starting ground for future projects. 
+
+As the use of, and the talent pool for containerisation and it's ecosystem matures, the fundamental technological activities that are consistently carried out across microenterprise ventures such as container orchestration and toolchain creation could be structured into modular and re-usable processes through IaC in the form of a centralised organisational repository. These activities could be replicated with ease in ventures across the world leading to radically lower boot times and increased predictability of the tech stack behaviour.
+
+**Key Outcomes**
+
+The long term project vision is to significantly reduce the time and resources invested in carrying out the fundamental technology activities that are repeated across every venture and transform them into a simple and predictable process as straightforward as running `terraform apply`. The process, including all code files, documentation and architectural diagrams will be stored on a repository such as GitHub which will also allow for freely-flowing open-source like collaboration from company engineers.
+
+An important architectural decision for the project would be to segment deliverables into core and 'nice-to-have' functionalities and to focus on the key value points of service discovery, operability and observability. It is proposed that a highly extendible skeleton architecture is created that allows future developers to simply write extensions for functionalities such as caching, i18n/l10n or message broking and integrate the code for these functionalities via interfaces with the core skeleton code or by adding negligible lines of YAML configuration.

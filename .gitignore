@@ -1,0 +1,3 @@
+.backup
+#  Local .terraform directories
+**/.terraform/*
