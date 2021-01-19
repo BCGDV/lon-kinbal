@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "docker build -t ppanchal97/outboundmessagesservice . && docker run -p 491606:3000 -d ppanchal97/outboundmessagesservice"
   },
   "keywords": [],
   "author": "",
