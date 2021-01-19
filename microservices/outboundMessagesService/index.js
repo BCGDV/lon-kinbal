@@ -1,4 +1,7 @@
 const express = require('express')
+const AWS = require("aws-sdk")
+const eventbridge = new AWS.EventBridge()
+
 const app = express()
 const port = 5000
 
