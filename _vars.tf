@@ -18,6 +18,12 @@ variable "cluster_name" {
   description = "specifies the unique eks cluster name"
 }
 
+# REQUIRED - CUSTOMIZABLE
+variable "cluster_version" {
+  default     = "1.18"
+  description = "specifies the eks k8s cluster version"
+}
+
 # OPTIONAL - EXTENDABLE
 variable "map_accounts" {
   description = "Specifies additional AWS account numbers to add to the aws-auth configmap"
