@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "docker build -t ppanchal97/ordersservice . && docker run -p 491603:3000 -d ppanchal97/ordersservice"
+    "start": "docker build -t ppanchal97/ordersservice . && docker run -p 49162:3000 -d ppanchal97/ordersservice"
   },
   "keywords": [],
   "author": "",

@@ -5,9 +5,9 @@ const eventbridge = new AWS.EventBridge()
 const app = express()
 const port = 8080
 
-app.get('/', (req, res) => {
+app.post('/payments/create', (req, res) => {
     console.log(req);
-    res.send('payments service')
+    res.send('ok')
 })
 
 app.get('/ping', (req, res) => {

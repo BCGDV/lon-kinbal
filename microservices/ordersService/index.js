@@ -5,9 +5,20 @@ const eventbridge = new AWS.EventBridge()
 const app = express()
 const port = 4000
 
-app.get('/', (req, res) => {
-    console.log(req);
-    res.status(200).send('orders service')
+app.post('/orders/create', (req, res) => {
+    // check if item is in quantity
+
+    // emit order event
+
+    // return
+    res.status(200).send('ok')
+})
+
+app.post('/orders/dispatch', (req, res) => {
+    // dispatch order
+
+    // return
+    res.status(200).send('ok')
 })
 
 app.get('/ping', (req, res) => {

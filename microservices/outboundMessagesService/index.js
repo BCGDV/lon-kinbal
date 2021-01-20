@@ -5,9 +5,9 @@ const eventbridge = new AWS.EventBridge()
 const app = express()
 const port = 5000
 
-app.get('/', (req, res) => {
+app.post('/messages/send', (req, res) => {
     console.log(req);
-    res.send('outbound messages service')
+    res.send('ok')
 })
 
 app.get('/ping', (req, res) => {
