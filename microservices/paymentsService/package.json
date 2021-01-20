@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "docker build -t ppanchal97/paymentsservice . && docker run -p 491608:3000 -d ppanchal97/paymentsservice"
+    "start": "docker build -t ppanchal97/paymentsservice . && docker run -p 491608:8080 -d ppanchal97/paymentsservice"
   },
   "keywords": [],
   "author": "",

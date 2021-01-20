@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "docker build -t ppanchal97/outboundmessagesservice . && docker run -p 491606:3000 -d ppanchal97/outboundmessagesservice"
+    "start": "docker build -t ppanchal97/outboundmessagesservice . && docker run -p 491606:5000 -d ppanchal97/outboundmessagesservice"
   },
   "keywords": [],
   "author": "",
