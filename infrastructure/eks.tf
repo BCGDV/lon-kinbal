@@ -7,12 +7,15 @@ data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
 
+data "aws_availability_zones" "available" {
+}
+
 # Creates the managed control plane
 module "eks" {
   source          = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v12.2.0"
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
-  vpc_id          = module.vpc.aws_vpc_id
+  vpc_id          = module.vpc.vpc_id
   subnets         = module.vpc.private_subnets
 
   # The Node groups - for static EC2 instances
@@ -35,9 +38,9 @@ resource "aws_eks_fargate_profile" "aws_eks_fargate_profile1" {
   depends_on = [module.eks]
 
   cluster_name           = var.cluster_name
-  fargate_profile_name   = "fg_profile_microservices_namespace"
+  fargate_profile_name   = "microservices"
   pod_execution_role_arn = aws_iam_role.iam_role_fargate.arn
-  subnet_ids             = module.vpc.private_subnets_ids
+  subnet_ids             = module.vpc.private_subnets
   selector {
     namespace = "microservices"
   }
@@ -65,7 +68,7 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEKSFargatePodExecutionR
 }
 
 resource "aws_iam_policy" "worker_policy" {
-  name        = "worker-policy"
+  name        = "${var.cluster_name}-worker-policy"
   description = "Worker policy for the ALB Ingress"
 
   policy = file("iam-policy.json")

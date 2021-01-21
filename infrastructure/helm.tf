@@ -16,7 +16,7 @@ resource "helm_release" "ingress" {
   clusterName: ${var.cluster_name}
   region: ${var.region}
   namespace: "microservices"
-  vpcId: ${module.vpc.aws_vpc_id}
+  vpcId: ${module.vpc.vpc_id}
   hostNetwork: true
   EOF
   ]

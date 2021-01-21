@@ -14,7 +14,7 @@ variable "account_id" {
 
 # REQUIRED - CUSTOMIZABLE
 variable "cluster_name" {
-  default     = "bcg-dv-microenterprise-stack"
+  default     = "microenterprise"
   description = "specifies the unique eks cluster name"
 }
 
