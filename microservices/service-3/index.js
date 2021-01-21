@@ -6,6 +6,7 @@ const app = express()
 const port = 8080
 
 app.get('/ping', (req, res) => {
+    console.log(`${req.url} ${req.method}`)
     res.status(200).send({
         service: 'service-3',
         res: 'PONG'
