@@ -16,7 +16,8 @@ module "eks" {
       instance_type = "t2.small"
     }
   }
-  manage_aws_auth = false
+  manage_aws_auth             = false
+  workers_additional_policies = [aws_iam_policy.worker_policy.arn]
 }
 
 # Fargate Profile
@@ -52,4 +53,11 @@ resource "aws_iam_role" "iam_role_fargate" {
 resource "aws_iam_role_policy_attachment" "example-AmazonEKSFargatePodExecutionRolePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
   role       = aws_iam_role.iam_role_fargate.name
+}
+
+resource "aws_iam_policy" "worker_policy" {
+  name        = "worker-policy"
+  description = "Worker policy for the ALB Ingress"
+
+  policy = file("iam-policy.json")
 }
