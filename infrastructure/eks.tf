@@ -48,7 +48,7 @@ resource "aws_eks_fargate_profile" "aws_eks_fargate_profile1" {
 
 # IAM Role for the Fargate profile
 resource "aws_iam_role" "iam_role_fargate" {
-  name = "eks-fargate-profile-example"
+  name = "${var.cluster_name}-eks-fargate-profile"
   assume_role_policy = jsonencode({
     Statement = [{
       Action = "sts:AssumeRole"
