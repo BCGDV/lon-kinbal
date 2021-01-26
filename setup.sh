@@ -27,4 +27,4 @@ kubectl apply -f ./deployment.yaml
 cd ../service-3
 kubectl apply -f ./deployment.yaml
 
-kubectl get pods -n microservices -o wide
+kubectl describe ingress -A
