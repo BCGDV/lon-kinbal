@@ -9,7 +9,6 @@ module "eks_cluster_dev" {
   region                             = "us-east-1"
   fargate_profile_name               = "microservices-fargate-profile"
   fargate_profile_selector_namespace = "microservices"
-
 }
 
 # module "eks_cluster_staging" {
@@ -23,7 +22,6 @@ module "eks_cluster_dev" {
 #   region                             = "us-east-1"
 #   fargate_profile_name               = "microservices-fargate-profile"
 #   fargate_profile_selector_namespace = "microservices"
-
 # }
 
 # module "eks_cluster_production" {
@@ -37,5 +35,4 @@ module "eks_cluster_dev" {
 #   region                             = "us-east-1"
 #   fargate_profile_name               = "microservices-fargate-profile"
 #   fargate_profile_selector_namespace = "microservices"
-
 # }
