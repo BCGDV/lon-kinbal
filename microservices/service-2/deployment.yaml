@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: Always
           name: service-2
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
 ---
 apiVersion: v1
 kind: Service
@@ -34,7 +34,7 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 8081
       protocol: TCP
   type: NodePort
   selector:
