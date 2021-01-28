@@ -1,6 +1,6 @@
 # Kinbal
 
-Spin up a fully managed Kubernetes cluster on AWS with 0 hassle in 15 mins or less 🚀
+Spin up a fully managed production grade Kubernetes cluster with multiple environments on AWS with 0 hassle in 15 mins or less 🚀
 
 ## About
 
@@ -31,6 +31,10 @@ Find more about Kubernetes control plane components at [https://kubernetes.io/do
 3. Navigate to the working directory
 4. run `sh deploy.sh`. The script will provision the infrastructure onto your linked AWS account, create and deploy the microservices
 5. To open the Kubernetes dashboard, copy the token from stdout and open 'http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login'. Paste your token for authentication when required.
+
+## Notes
+- AWS EKS is excluded from all free-tier discounts and you will be charged to run Kinbal
+- The infrastructure can provision dev / staging / production environments but due to cost constraints the staging / production modules have been commented out
 
 ## Patterns Used
 
