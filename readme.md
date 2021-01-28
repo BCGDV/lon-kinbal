@@ -37,6 +37,35 @@ Find more about Kubernetes control plane components at [https://kubernetes.io/do
 **Architecture** - N/A (basic)
 
 **Endpoints**
+#### / (GET)
+
+Returns informaion regarding the service
+
+Parameters: N/A
+
+Response 200:
+
+```
+{
+    "service" : "service-1",
+    "res" :: TIMESTAMP
+}
+```
+
+#### /ping (GET)
+
+Health check endpooint
+
+Parameters: N/A
+
+Response 200:
+
+```
+{
+    "service" : "service-1",
+    "res" :: "PONG"
+}
+```
 
 ## Architecture
 
