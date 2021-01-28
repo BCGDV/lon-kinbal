@@ -1,11 +1,43 @@
-**Introduction**
+# Kinbal
 
-As we iterate on our fundamental customer value proposition of BBaas (Business building as a service) to working closely with clients on creating innovation 'inside their firewall' with mixed client-DV teams - it is of fundamental importance to the business to launch ventures with technologies that are scalable, maintainable and most importantly compliant. Previous microenterprise ventures with close client-DV collaboration have led to the discovery of opportunity areas within the kickoff phase of these ventures that could significantly reduce boot times, increase organisational code re-usability and provide a consistent technological starting ground for future projects. 
+Spin up a fully managed Kubernetes cluster on AWS with 0 hassle in 15 mins or less 🚀
 
-As the use of, and the talent pool for containerisation and it's ecosystem matures, the fundamental technological activities that are consistently carried out across microenterprise ventures such as container orchestration and toolchain creation could be structured into modular and re-usable processes through IaC in the form of a centralised organisational repository. These activities could be replicated with ease in ventures across the world leading to radically lower boot times and increased predictability of the tech stack behaviour.
+## About
 
-**Key Outcomes**
+Deploying Kinbal will automatically create the following components into an AWS region of your choice:
 
-The long term project vision is to significantly reduce the time and resources invested in carrying out the fundamental technology activities that are repeated across every venture and transform them into a simple and predictable process as straightforward as running `terraform apply`. The process, including all code files, documentation and architectural diagrams will be stored on a repository such as GitHub which will also allow for freely-flowing open-source like collaboration from company engineers.
+- A fully managed Kubernetes control plane that includes the following fully managed components over 3 availability zones:
+    - kube-apiserver
+    - etcd stores
+    - kube-scheduler
+    - kube-controller-manager
+    - cloud-controller-manager
 
-An important architectural decision for the project would be to segment deliverables into core and 'nice-to-have' functionalities and to focus on the key value points of service discovery, operability and observability. It is proposed that a highly extendible skeleton architecture is created that allows future developers to simply write extensions for functionalities such as caching, i18n/l10n or message broking and integrate the code for these functionalities via interfaces with the core skeleton code or by adding negligible lines of YAML configuration.
+Find more about Kubernetes control plane components at [https://kubernetes.io/docs/concepts/overview/components/](https://kubernetes.io/docs/concepts/overview/components/)
+
+- A semi-managed worker node group with 3 nodes running the Docker container runtime and the optimized Amazon Linux 2 AMI. The nodes are provisioned inside of an autoscaling group and the configuration will fully automate the provisioning and lifecycle management of nodes (Amazon EC2 instances) for the EKS cluster
+- A Fargate profile that allows workloads and pods to be run in a serverless fashion as well as allocates the right amount of compute resources, eliminating the need to choose instances and scale cluster capacity. Fargate runs each task or pod in its own kernel providing the tasks and pods their own isolated compute environment
+- 3 exemplar microservices that are built using Javascript (Node), Go and Python that are deployed using Fargate. These microservices have the following characteristics and components:
+    - Health check endpoints
+    - Containerised using Docker
+    - Contain their own deployment configuration files that provision services, deployments and ingresses
+- An Application Load Balancer (ALB) and an ALB ingress-controller so that traffic from the internet can be correctly routed to the microservices running inside the pod
+- An EventBridge Event-bus resource without any pre-configured event routing rules that forms the backbone of the events driven communication architecture for the microservices
+
+## Patterns Used
+
+- Highly decoupled event driven microservices that communicate with each other using pub-sub based message passing via an event-bus
+
+## Microservices
+
+### Service 1
+
+**Technology** - Javascript (Node)
+
+**Architecture** - N/A (basic)
+
+**Endpoints**
+
+## Architecture
+
+![Kinbal%20973f0a3ede1d4f78918c0c478b33951d/Kinbal_(1).png](https://i.imgur.com/qIRhzIu.png "Architecture")
