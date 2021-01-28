@@ -67,6 +67,48 @@ Response 200:
 }
 ```
 
+### Service 2
+
+**Technology** - Go
+
+**Architecture** - N/A (basic)
+
+**Endpoints**
+#### /ping (GET)
+
+Health check endpooint
+
+Parameters: N/A
+
+Response 200:
+
+```
+{
+    "res" :: "PONG"
+}
+```
+
+### Service 3
+
+**Technology** - Python3
+
+**Architecture** - N/A (basic)
+
+**Endpoints**
+#### /ping (GET)
+
+Health check endpooint
+
+Parameters: N/A
+
+Response 200:
+
+```
+{
+    "res" :: "PONG"
+}
+```
+
 ## Architecture
 
 ![Kinbal%20973f0a3ede1d4f78918c0c478b33951d/Kinbal_(1).png](https://i.imgur.com/qIRhzIu.png "Architecture")
