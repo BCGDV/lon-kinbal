@@ -43,7 +43,11 @@ Find more about Kubernetes control plane and worker node components at [https://
 2. Run `kubectl get ingress -n microservices` to see all of the public addresses of the services
 3. Connect to a service using cURL to verify deployment
 
-## Notes
+## Important Notes
+- You can edit / add / remove the microservices - but for local code changes to be deployed, you will need to:
+    - Rebuild the image e.g. `docker build -t ppanchal97/service1 .`
+    - Push the image up to Docker Hub e.g. `docker push ppanchal97/service1`
+    - Rollout Restart the pods and the deployment e.g. `kubectl rollout restart deployment service-1-deployment -n microservices`
 - AWS EKS is excluded from all free-tier discounts and you will be charged to run Kinbal
 - The infrastructure can provision dev / staging / production environments but due to cost constraints the staging / production modules have been commented out
 
