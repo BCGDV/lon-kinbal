@@ -21,8 +21,16 @@ Find more about Kubernetes control plane components at [https://kubernetes.io/do
     - Health check endpoints
     - Containerised using Docker
     - Contain their own deployment configuration files that provision services, deployments and ingresses
+- The Kubernetes dashboard running on your local maching on port 8001
 - An Application Load Balancer (ALB) and an ALB ingress-controller so that traffic from the internet can be correctly routed to the microservices running inside the pod
 - An EventBridge Event-bus resource without any pre-configured event routing rules that forms the backbone of the events driven communication architecture for the microservices
+
+## How to Deploy
+1. Clone the repo by running `git clone https://github.com/BCGDV/lon-kinbal.git`
+2. Make sure you have Terraform, aws-cli, kubectl installed
+3. Navigate to the working directory
+4. run `sh deploy.sh`. The script will provision the infrastructure onto your linked AWS account, create and deploy the microservices
+5. To open the Kubernetes dashboard, copy the token from stdout and open 'http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login'. Paste your token for authentication when required.
 
 ## Patterns Used
 
