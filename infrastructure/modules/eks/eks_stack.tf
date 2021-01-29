@@ -286,7 +286,7 @@ resource "aws_cloudwatch_event_bus" "event-bus" {
   name = "${var.cluster_name}-event-bus"
 }
 
-resource "aws_db_instance" "boujie-database" {
+resource "aws_db_instance" "database" {
   identifier = "${var.cluster_name}-database"
   allocated_storage   = var.database_instance_allocated_storage
   storage_type        = var.database_instance_storage_type
