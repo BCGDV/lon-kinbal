@@ -285,15 +285,31 @@ module "vpc" {
 resource "aws_cloudwatch_event_bus" "event-bus" {
   name = "${var.cluster_name}-event-bus"
 }
+module "db" {
+  source  = "terraform-aws-modules/rds-aurora/aws"
+  version = "~> 3.0"
 
-resource "aws_db_instance" "database" {
-  identifier = "${var.cluster_name}-database"
-  allocated_storage   = var.database_instance_allocated_storage
-  storage_type        = var.database_instance_storage_type
-  engine              = var.database_instance_engine
-  instance_class      = var.database_instance_class
-  name                = var.database_name 
-  username            = var.database_username
-  password            = var.database_password
-  publicly_accessible = true
+  name = "${var.cluster_name}-database"
+
+  engine         = "aurora-postgresql"
+  engine_version = "11.7"
+
+  vpc_id  = module.vpc.vpc_id
+  subnets = module.vpc.private_subnets
+
+  replica_count = 1
+  # allowed_security_groups = module.vpc.security_groups
+  allowed_cidr_blocks = [module.vpc.vpc_cidr_block]
+  instance_type       = var.database_instance_class
+  storage_encrypted   = true
+  apply_immediately   = true
+  monitoring_interval = 10
+
+  username = var.database_username
+  password = var.database_password
+
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+  }
 }
