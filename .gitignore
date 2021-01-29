@@ -4,3 +4,6 @@
 #  var .terraform directories
 **/.terraform/*
 **node_modules
+kubeconfig_microenterprise-dev
+kubeconfig_microenterprise-staging
+kubeconfig_microenterprise-production
