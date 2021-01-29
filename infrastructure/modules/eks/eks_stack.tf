@@ -285,3 +285,15 @@ module "vpc" {
 resource "aws_cloudwatch_event_bus" "event-bus" {
   name = "${var.cluster_name}-event-bus"
 }
+
+resource "aws_db_instance" "boujie-database" {
+  identifier = "${var.cluster_name}-database"
+  allocated_storage   = var.database_instance_allocated_storage
+  storage_type        = var.database_instance_storage_type
+  engine              = var.database_instance_engine
+  instance_class      = var.database_instance_class
+  name                = var.database_name 
+  username            = var.database_username
+  password            = var.database_password
+  publicly_accessible = true
+}
