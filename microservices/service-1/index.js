@@ -6,10 +6,10 @@ const app = express()
 const port = 8080
 
 app.get('/', (req, res) => {
-    console.log(`${req.url} ${req.method}`)
+    console.log(`${req.url} ${req.method} ${Math.round((new Date()).getTime() / 1000)}`)
     res.status(200).send({
         service: 'service-1',
-        res: `Request received on ${new Date()}`
+        res: `Request received on ${Math.round((new Date()).getTime() / 1000)}`
     })
 })
 

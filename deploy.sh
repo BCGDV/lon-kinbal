@@ -5,8 +5,9 @@ terraform apply
 aws eks update-kubeconfig --name microenterprise-dev
 
 # Deploy microservices
-cd ..
-cd microservices/service-1
+cd ../microservices
+kubectl apply -f ./fargate-namespace.yaml
+cd service-1
 kubectl apply -f ./deployment.yaml
 cd ../service-2
 kubectl apply -f ./deployment.yaml
