@@ -8,11 +8,11 @@ aws eks update-kubeconfig --name microenterprise-dev
 cd ../microservices
 kubectl apply -f ./fargate-namespace.yaml
 cd service-1
-kubectl apply -f ./deployment.yaml
+kubectl apply -f ./deployment.yaml && aws rds create-db-instance --db-name service1db --db-instance-identifier microenterprise-service-1 --db-instance-class db.t2.micro --engine postgres --allocated-storage 20 --storage-type gp2 --master-username microenterpriseadmin --master-user-password microenterpriseadminpassword --publicly-accessible
 cd ../service-2
-kubectl apply -f ./deployment.yaml
+kubectl apply -f ./deployment.yaml && aws rds create-db-instance --db-name service2db --db-instance-identifier microenterprise-service-2 --db-instance-class db.t2.micro --engine postgres --allocated-storage 20 --storage-type gp2 --master-username microenterpriseadmin --master-user-password microenterpriseadminpassword --publicly-accessible
 cd ../service-3
-kubectl apply -f ./deployment.yaml
+kubectl apply -f ./deployment.yaml && aws rds create-db-instance --db-name service3db --db-instance-identifier microenterprise-service-3 --db-instance-class db.t2.micro --engine postgres --allocated-storage 20 --storage-type gp2 --master-username microenterpriseadmin --master-user-password microenterpriseadminpassword --publicly-accessible
 
 # Deploy dashboard
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
