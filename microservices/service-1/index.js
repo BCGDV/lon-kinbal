@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const { ulid } = require('ulid')
 
 const AWS = require("aws-sdk")
 const eventbridge = new AWS.EventBridge()
@@ -31,26 +32,26 @@ app.get('/ping', (req, res) => {
     })
 })
 
-app.post('/users/create', async (req, res) => {
+app.post('/orders/create', async (req, res) => {
     try {
         console.log(`${req.url} ${req.method} ${Math.round((new Date()).getTime() / 1000)}`)
-        const { name } = req.body
-        const dbRes = await pool.query(`INSERT INTO users(name, createdat) VALUES ('${name}', '${new Date().toUTCString()}') RETURNING *`)
-        // emit user created event
-        const user = dbRes.rows;
-        res.status(200).send({ res: user })
+        const { item, quantity, userid } = req.body
+        const dbRes = await pool.query(`INSERT INTO orders(orderid, item, quantity, userid, createdat) VALUES ('${ulid()}', '${item}', ${quantity}, '${userid}', '${new Date().toUTCString()}') RETURNING *`)
+        // emit order created event
+        const order = dbRes.rows;
+        res.status(200).send({ res: order })
     } catch (e) {
         console.log(e)
     }
 })
 
-app.get('/users/get', async (req, res) => {
+app.get('/orders/get', async (req, res) => {
     try {
         console.log(`${req.url} ${req.method} ${Math.round((new Date()).getTime() / 1000)}`)
-        const dbRes = await pool.query('SELECT * from users ORDER BY random() LIMIT 3;');
-        const users = dbRes.rows;
-        console.log("fetched users => ", users)
-        res.status(200).send({ res: users })
+        const dbRes = await pool.query('SELECT * from orders ORDER BY random() LIMIT 3;');
+        const orders = dbRes.rows;
+        console.log("fetched orders => ", orders)
+        res.status(200).send({ res: orders })
     } catch (e) {
         console.log(e)
     }
