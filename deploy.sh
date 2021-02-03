@@ -16,16 +16,11 @@ kubectl apply -f ./deployment.yaml && aws rds create-db-instance --db-name servi
 
 # Deploy dashboard
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
-sleep 5s
 kubectl get deployment metrics-server -n kube-system
-sleep 5s
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.5/aio/deploy/recommended.yaml
-sleep 5s
 kubectl apply -f ./support/eks-admin-service-account.yaml
-sleep 5s
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
 kubectl proxy
-sleep 5s
 open -a "Google Chrome" 'http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login'
 
 kubectl describe ingress -A
