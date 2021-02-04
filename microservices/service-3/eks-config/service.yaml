@@ -11,21 +11,3 @@ spec:
   type: NodePort
   selector:
     app.kubernetes.io/name: service-3
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  namespace: microservices
-  name: ingress-service-3
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /*
-            backend:
-              serviceName: service-3
-              servicePort: 80

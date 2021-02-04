@@ -5,12 +5,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: service-1
-  replicas: 3
+      app: service-1
+  replicas: 1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: service-1
+        app: service-1
     spec:
       containers:
         - image: ppanchal97/service1
