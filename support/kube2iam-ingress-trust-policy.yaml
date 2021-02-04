@@ -13,7 +13,7 @@
       "Sid": "",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::212285161954:role/microenterprise-dev20210203151010312300000008"
+        "AWS": "arn:aws:iam::212285161954:role/microenterprise-dev20210203233241656600000008"
       },
       "Action": "sts:AssumeRole"
     }

@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    apigateway.ingress.kubernetes.io/client-arns: arn:aws:iam::212285161954:user/parikpanchal
+    apigateway.ingress.kubernetes.io/stage-name: prod
+    kubernetes.io/ingress.class: apigateway
+  name: api-25071997
+  namespace: default
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: service-1
+          servicePort: 80
+        path: /
