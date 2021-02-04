@@ -12,7 +12,7 @@ const { pool } = require("./db")
 
 app.use(bodyParser.json())
 
-app.get('/', async (req, res) => {
+app.get('/service/info', async (req, res) => {
     try {
         console.log(`${req.url} ${req.method} ${Math.round((new Date()).getTime() / 1000)}`)
         res.status(200).send({
