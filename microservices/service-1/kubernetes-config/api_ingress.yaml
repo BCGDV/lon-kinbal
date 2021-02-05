@@ -11,7 +11,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /services/info
+          - path: /service/info
             backend:
               serviceName: service-1
               servicePort: 80
