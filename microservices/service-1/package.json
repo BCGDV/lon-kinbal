@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "docker build -t ppanchal97/service1 . && docker run -p 8080:8080 -d ppanchal97/service1",
-    "deploy": "docker build -t ppanchal97/service1 . && docker push ppanchal97/service1 && kubectl rollout restart deployment service-1-deployment -n microservices"
+    "deploy": "docker build -t ppanchal97/service1 . && docker push ppanchal97/service1 && kubectl rollout restart deployment service-1-deployment"
   },
   "keywords": [],
   "author": "",

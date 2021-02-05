@@ -48,7 +48,7 @@ app.post('/orders/create', async (req, res) => {
 app.get('/orders/get', async (req, res) => {
     try {
         console.log(`${req.url} ${req.method} ${Math.round((new Date()).getTime() / 1000)}`)
-        const dbRes = await pool.query('SELECT * from orders ORDER BY random() LIMIT 3;');
+        const dbRes = await pool.query('SELECT * from orders;');
         const orders = dbRes.rows;
         console.log("fetched orders => ", orders)
         res.status(200).send({ res: orders })
