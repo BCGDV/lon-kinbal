@@ -5,25 +5,18 @@ metadata:
     apigateway.ingress.kubernetes.io/client-arns: arn:aws:iam::212285161954:user/parikpanchal
     apigateway.ingress.kubernetes.io/stage-name: dev
     kubernetes.io/ingress.class: apigateway
-  name: service-1-api
+  name: service-3-api
   namespace: default
 spec:
   rules:
     - http:
         paths:
-          - path: /service/info
-            backend:
-              serviceName: service-1
-              servicePort: 80
           - path: /ping
             backend:
-              serviceName: service-1
+              serviceName: service-3
               servicePort: 80
-          - path: /orders/create
+          - path: /service/info
             backend:
-              serviceName: service-1
+              serviceName: service-3
               servicePort: 80
-          - path: /orders/get
-            backend:
-              serviceName: service-1
-              servicePort: 80
+              

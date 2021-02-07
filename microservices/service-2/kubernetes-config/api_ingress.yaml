@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    apigateway.ingress.kubernetes.io/client-arns: arn:aws:iam::212285161954:user/parikpanchal
+    apigateway.ingress.kubernetes.io/stage-name: dev
+    kubernetes.io/ingress.class: apigateway
+  name: service-2-api
+  namespace: default
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /ping
+            backend:
+              serviceName: service-2
+              servicePort: 80

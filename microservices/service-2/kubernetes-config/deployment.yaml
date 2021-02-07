@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-2-deployment
+spec:
+  selector:
+    matchLabels:
+      app: service-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-2
+    spec:
+      containers:
+        - image: ppanchal97/service2
+          imagePullPolicy: Always
+          name: service-2
+          ports:
+            - containerPort: 8081

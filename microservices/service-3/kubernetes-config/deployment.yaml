@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-3-deployment
+spec:
+  selector:
+    matchLabels:
+      app: service-3
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-3
+    spec:
+      containers:
+        - image: ppanchal97/service3
+          imagePullPolicy: Always
+          name: service-3
+          ports:
+            - containerPort: 5000
