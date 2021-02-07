@@ -1,5 +1,3 @@
-
-
 # IAM Role for the Fargate profile
 resource "aws_iam_role" "iam_role_fargate" {
   name = "${var.cluster_name}-eks-fargate-profile"
@@ -15,7 +13,7 @@ resource "aws_iam_role" "iam_role_fargate" {
   })
 }
 
-# Attach a managed IAM Policy to an IAM role
+# Allow Fargate pods access to ALB
 resource "aws_iam_role_policy_attachment" "example-AmazonEKSFargatePodExecutionRolePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
   role       = aws_iam_role.iam_role_fargate.name
@@ -23,7 +21,7 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEKSFargatePodExecutionR
 
 resource "aws_iam_policy" "worker_policy" {
   name        = "${var.cluster_name}-worker-policy"
-  description = "Worker policy for the ALB Ingress"
+  description = "Worker policy"
 
   policy = <<EOF
 {
@@ -167,4 +165,28 @@ resource "aws_iam_policy" "worker_policy" {
     ]
 }
   EOF
+}
+
+#
+resource "aws_iam_role" "iam_role_worker_nodes" {
+  name = "kube2iam-ingress-role"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : "sts:AssumeRole",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "ec2.amazonaws.com"
+        }
+      },
+      {
+        "Action" : "sts:AssumeRole",
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : module.eks.worker_iam_role_arn
+        }
+      }
+    ]
+  })
 }
