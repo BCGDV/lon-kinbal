@@ -15,3 +15,7 @@ spec:
             backend:
               serviceName: service-2
               servicePort: 80
+          - path: /service/info
+            backend:
+              serviceName: service-2
+              servicePort: 80

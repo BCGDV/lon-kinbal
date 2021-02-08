@@ -15,7 +15,7 @@ spec:
             backend:
               serviceName: service-3
               servicePort: 80
-          - path: /ping
+          - path: /service/info
             backend:
               serviceName: service-3
               servicePort: 80
