@@ -30,24 +30,6 @@ app.get('/service/info', async (req, res) => {
 app.get('/ping', async (req, res) => {
     try {
         console.log(`${req.url} ${req.method}`)
-        const params = {
-            Entries: [
-                {
-                    Source: 'custom.parikpanchal',
-                    EventBusName: 'microenterprise-dev-event-bus',
-                    DetailType: 'transaction',
-                    Time: new Date(),
-                    // Main event body
-                    Detail: JSON.stringify({
-                        "a": "c"
-                    })
-                },
-            ]
-        };
-        await eventbridge.putEvents(params, function (err, data) {
-            if (err) console.log(err, err.stack); // an error occurred
-            else console.log(data);           // successful response
-        });
         res.status(200).send({
             service: 'service-1',
             res: 'PONG'
@@ -64,6 +46,24 @@ app.post('/orders/create', async (req, res) => {
         const dbRes = await pool.query(`INSERT INTO orders(orderid, item, quantity, userid, createdat) VALUES ('${ulid()}', '${item}', ${quantity}, '${userid}', '${new Date().toUTCString()}') RETURNING *`)
         // emit order created event
         const order = dbRes.rows;
+        const params = {
+            Entries: [
+                {
+                    Source: 'custom.parikpanchal',
+                    EventBusName: 'microenterprise-dev-event-bus',
+                    DetailType: 'order',
+                    Time: new Date(),
+                    // Main event body
+                    Detail: JSON.stringify({
+                        "order": order
+                    })
+                },
+            ]
+        };
+        await eventbridge.putEvents(params, function (err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else console.log(data);           // successful response
+        });
         res.status(200).send({ res: order })
     } catch (e) {
         console.log(e)
