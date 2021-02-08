@@ -9,3 +9,5 @@ kubeconfig_microenterprise-staging
 kubeconfig_microenterprise-production
 terraform.tfstate
 terraform.tfstate.backup
+
+*.env
