@@ -1,8 +1,11 @@
+require('dotenv').config()
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const { ulid } = require('ulid')
 
 const AWS = require("aws-sdk")
+AWS.config.update({ region: 'us-east-1', accessKeyId: process.env.AWSACCESSKEY, secretAccessKey: process.env.AWSSECRET });
 const eventbridge = new AWS.EventBridge()
 
 const app = express()
@@ -24,12 +27,34 @@ app.get('/service/info', async (req, res) => {
     }
 })
 
-app.get('/ping', (req, res) => {
-    console.log(`${req.url} ${req.method}`)
-    res.status(200).send({
-        service: 'service-1',
-        res: 'PONG'
-    })
+app.get('/ping', async (req, res) => {
+    try {
+        console.log(`${req.url} ${req.method}`)
+        const params = {
+            Entries: [
+                {
+                    Source: 'custom.parikpanchal',
+                    EventBusName: 'microenterprise-dev-event-bus',
+                    DetailType: 'transaction',
+                    Time: new Date(),
+                    // Main event body
+                    Detail: JSON.stringify({
+                        "a": "c"
+                    })
+                },
+            ]
+        };
+        await eventbridge.putEvents(params, function (err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else console.log(data);           // successful response
+        });
+        res.status(200).send({
+            service: 'service-1',
+            res: 'PONG'
+        })
+    } catch (e) {
+        console.log(e)
+    }
 })
 
 app.post('/orders/create', async (req, res) => {
