@@ -42,11 +42,6 @@ sleep 5
 cd ../service-3/kubernetes-config/
 kubectl apply -f ./deployment.yaml && kubectl apply -f ./service.yaml && kubectl apply -f ./api_ingress.yaml
 
-# Create persistence layer
-aws rds create-db-instance --db-name service1db --db-instance-identifier microenterprise-service-1 --db-instance-class db.t2.micro --engine postgres --allocated-storage 20 --storage-type gp2 --master-username microenterpriseadmin --master-user-password microenterpriseadminpassword --publicly-accessible
-aws rds create-db-instance --db-name service2db --db-instance-identifier microenterprise-service-2 --db-instance-class db.t2.micro --engine postgres --allocated-storage 20 --storage-type gp2 --master-username microenterpriseadmin --master-user-password microenterpriseadminpassword --publicly-accessible
-aws rds create-db-instance --db-name service3db --db-instance-identifier microenterprise-service-3 --db-instance-class db.t2.micro --engine postgres --allocated-storage 20 --storage-type gp2 --master-username microenterpriseadmin --master-user-password microenterpriseadminpassword --publicly-accessible
-
 Deploy dashboard
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
 kubectl get deployment metrics-server -n kube-system
