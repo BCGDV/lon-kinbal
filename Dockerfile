@@ -7,7 +7,7 @@ WORKDIR /usr/src/kinbal
 COPY . .
 
 # Install core dependenciess
-RUN apk add jq gzip nano tar git unzip wget sudo bash openssl
+RUN apk add jq gzip nano tar git unzip wget sudo bash openssl groff less
 
 # Update dependencies
 RUN apk upgrade

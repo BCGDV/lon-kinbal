@@ -11,7 +11,7 @@ cd ../support
 kubectl apply -f helm-rbac.yaml
 sleep 5
 helm init --service-account tiller
-sleep 5
+sleep 10
 
 # Deploy kube2iam chart
 tput setaf 4; echo "Deploying kube2iam chart"
