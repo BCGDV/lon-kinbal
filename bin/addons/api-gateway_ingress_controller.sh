@@ -4,7 +4,7 @@ export CLUSTER_NAME=$clustername
 
 # Configure helm access with RBAC
 tput setaf 4; echo "Configuring Helm"
-cd ../lib
+cd ../../lib
 kubectl apply -f helm-rbac.yaml
 sleep 5
 helm init --service-account tiller

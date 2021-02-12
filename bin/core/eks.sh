@@ -1,5 +1,5 @@
 # Deploy infrastructure
-cd ../../infrastructure
+cd ../../src/infrastructure
 tput setaf 4; echo "Provisioning EKS cluster"
 terraform init
 read -p "Enter Cluster Name: " clustername
