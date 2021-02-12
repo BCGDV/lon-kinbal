@@ -1,6 +1,5 @@
 module "eks_cluster_dev" {
   source                             = "./modules/eks_stack"
-  cluster_name                       = "microenterprise-dev"
   cluster_version                    = "1.18"
   node_group_desired_capacity        = 3
   node_group_max_capacity            = 3
@@ -13,7 +12,6 @@ module "eks_cluster_dev" {
 
 # module "eks_cluster_staging" {
 #   source                             = "./modules/eks_stack"
-#   cluster_name                       = "microenterprise-staging"
 #   cluster_version                    = "1.18"
 #   node_group_desired_capacity        = 3
 #   node_group_max_capacity            = 3
@@ -26,7 +24,6 @@ module "eks_cluster_dev" {
 
 # module "eks_cluster_production" {
 #   source                             = "./modules/eks_stack"
-#   cluster_name                       = "microenterprise-production"
 #   cluster_version                    = "1.18"
 #   node_group_desired_capacity        = 3
 #   node_group_max_capacity            = 3
