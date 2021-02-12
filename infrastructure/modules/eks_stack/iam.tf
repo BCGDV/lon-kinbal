@@ -168,7 +168,7 @@ resource "aws_iam_policy" "worker_policy" {
 }
 
 resource "aws_iam_role" "kube2iam-ingress-role" {
-  name = "kube2iam-ingress-role"
+  name = "${var.cluster_name}-kube2iam-ingress-role"
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
