@@ -51,5 +51,3 @@ RUN sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 RUN curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
 RUN chmod +x get_helm.sh
 RUN ./get_helm.sh
-
-# docker run -it --entrypoint /bin/sh ppanchal97/kinbal

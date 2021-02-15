@@ -1,5 +1,5 @@
-tput setaf 4; echo "Configuring Helm ALB Chart"
+echo "Configuring Helm ALB Chart"
 helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
 sleep 5
-tput setaf 4; echo "Installing ALB Chart into EKS cluster"
+echo "Installing ALB Chart into EKS cluster"
 helm install ingress incubator/aws-alb-ingress-controller --set autoDiscoverAwsRegion=true --set autoDiscoverAwsVpcID=true --set clusterName=my-cluster
