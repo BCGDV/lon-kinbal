@@ -1,6 +1,5 @@
-## Microservices
-
-- 3 exemplar microservices that are built using Javascript (Node), Go and Python that . These microservices have the following characteristics and components:
+## Introduction
+- There are 3 exemplar microservices that are built using Javascript (Node), Go and Python that . These microservices have the following characteristics and components:
     - Health check endpoints
     - Example persistence layer interactions
     - Example events layer interactions
@@ -8,6 +7,18 @@
     - Contain their own deployment configuration files that provision services, deployments and ingresses
 
 - Each exemplar microservice also provisions it's own dedicated and isolated persistence layer - a PostgreSQL RDS instance.
+
+## How to deploy
+1. `cd` into the service that you wish to deploy
+2. `cd` into the `kubernetes-config` of the service
+3. Create the deployment using kubectl by executing `kubectl apply -f ./deployment.yaml`
+4. Create the service using kubectl by executing `kubectl apply -f ./service.yaml`
+5. Create the ingress and the API using kubectl by executing `kubectl apply -f ./api_ingress.yaml`
+
+## How to verify
+1. Open the API-Gateway resource on the AWS console in the region that your cluster is deployed to.
+2. Click on an API and retrieve it's endpoint.
+3. Use a tool like Postman / Insomnia to poll the endpoints.
 
 ### Service 1
 

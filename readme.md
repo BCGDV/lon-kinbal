@@ -74,6 +74,7 @@ Find more about Kubernetes control plane and worker node components at [https://
 
 ### API-Gateway Ingress Controller <a name="apigwdeployment"></a>
 **To deploy:**
+- ⚠️ Open `./lib/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller/templates/statefulset.yaml` and rename the `spec.template.metadata.annotations.iam.amazonaws.com/role` to `<CLUSTER-NAME>-kube2iam-ingress-role` with the name of the cluster that you created.
 - run `sh ./bin/core/plugins/API-Gateway-Ingress-Controller/deploy.sh`
 **Resources created:**
 - An API deployed onto API-Gateway.
