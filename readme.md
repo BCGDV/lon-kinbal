@@ -43,7 +43,7 @@ Kinbal allows you to deploy a production-grade EKS cluster on AWS in 15 mins or 
 ## Core Deployments <a name="coredeployments"></a>
 ### EKS Cluster <a name="ekscluster"></a>
 **To deploy:**
-- run `sh /bin/core/EKS/deploy.sh`
+- run `sh ./bin/core/EKS/deploy.sh`
 **Resources created:**
 - A fully managed Control Plane
 - A semi-managed worker node group with 3 EC2 nodes running the Docker runtime and the optimized Amazon Linux 2 AMI. These nodes are provisioned inside of an autoscaling group and the configuration will fully automate the provisioning and lifecycle management of nodes for the EKS cluster.
@@ -58,7 +58,7 @@ Find more about Kubernetes control plane and worker node components at [https://
 
 ### Dashboard <a name="dashboard"></a>
 **To deploy:**
-- run `sh /bin/core/dashboard/deploy.sh`
+- run `sh ./bin/core/dashboard/deploy.sh`
 **Resources created:**
 - The Kubernetes dashboard running on your Docker container on port 8001.
 **Verify deployment**
@@ -67,14 +67,14 @@ Find more about Kubernetes control plane and worker node components at [https://
 ## Plugin Deployments <a name="plugindeployments"></a>
 ### Application Load Balancer (ALB) Ingress Controller <a name="albdeployment"></a>
 **To deploy:**
-- run `sh /bin/core/plugins/ALB-Ingress-Controller/deploy.sh`
+- run `sh ./bin/core/plugins/ALB-Ingress-Controller/deploy.sh`
 **Resources created:**
 - An AWS Application Load Balancer with the necessary rules and listeners pre-configured.
 - An ALB ingress controller that allows the Kubernetes cluster to interact with and control the ALB resource.
 
 ### API-Gateway Ingress Controller <a name="apigwdeployment"></a>
 **To deploy:**
-- run `sh /bin/core/plugins/API-Gateway-Ingress-Controller/deploy.sh`
+- run `sh ./bin/core/plugins/API-Gateway-Ingress-Controller/deploy.sh`
 **Resources created:**
 - An API deployed onto API-Gateway.
 - An API-Gateway ingress controller so that traffic from the internet can be correctly routed to the microservices running inside the pod. Every service is configured as an API and is managed using AWS API-Gateway.
@@ -85,15 +85,15 @@ Find more about Kubernetes control plane and worker node components at [https://
 
 ### Kong Gateway <a name="konggateway"></a>
 **To deploy:**
-- run `sh /bin/core/plugins/Kong-Gateway/deploy.sh`
+- run `sh ./bin/core/plugins/Kong-Gateway/deploy.sh`
 
 ### Fargate Profile <a name="fargateprofile"></a>
 **To deploy:**
-- run `sh /bin/core/plugins/Fargate-profile/deploy.sh`
+- run `sh ./bin/core/plugins/Fargate-profile/deploy.sh`
 
 ### Istio <a name="istio"></a>
 **To deploy:**
-- run `sh /bin/core/plugins/Istio/deploy.sh`
+- run `sh ./bin/core/plugins/Istio/deploy.sh`
 
 ## Teardown <a name="teardown"></a>
 **Note**
