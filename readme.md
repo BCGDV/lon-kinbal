@@ -1,8 +1,24 @@
-# Kinbal
+# Table of contents
+1. [Introduction](#introduction)
+2. [Important Notes](#importantnotes)
+3. [Prerequisites](#prerequisites)
+4. [Getting Started](#gettingstarted)
+5. [Core Deployments](#coredeployments)
+    1. [ESK Cluster](#ekscluster)
+    2. [Dashboard](#dashboard)
+6. [Plugin Deployments](#plugindeployments)
+    1. [ALB Ingress Controller](#albdeployment)
+    2. [API-Gateway Ingress Controller](#apigwdeployment)
+    3. [Kong Gateway](#konggateway)
+    4. [Fargate Profile](#fargateprofile)
+    5. [Istio](#istio)
+7. [Teardown](#teardown)
+8. [Useful Commands](#usefulcommands)
 
-Deploy a production-grade EKS cluster on AWS in 15 mins or less. 🚀🐳
+## Introduction <a name="introduction"></a>
+Kinbal allows you to deploy a production-grade EKS cluster on AWS in 15 mins or less. 🚀🐳
 
-## Important Notes
+## Important Notes <a name="importantnotes"></a>
 - You must deploy the core EKS cluster by executing `/bin/core/eks.sh` first before adding the plugins.
 - You can edit / add / remove the microservices as you wish. For local code changes to propagate to the cluster, you will need to:
     - Rebuild the image e.g. `docker build -t ppanchal97/service1 .`
@@ -14,18 +30,18 @@ Deploy a production-grade EKS cluster on AWS in 15 mins or less. 🚀🐳
 - AWS EKS is excluded from all free-tier discounts and you will be charged to run Kinbal.
 - The infrastructure can provision dev / staging / production environments but due to cost constraints, the staging / production modules have been commented out.
 
-## Prerequisites
+## Prerequisites <a name="prerequisites"></a>
 1. Docker
 
-## Getting Started
+## Getting Started <a name="gettingstarted"></a>
 - Run the project using Docker by executing the following command `docker run -it --entrypoint /bin/sh ppanchal97/kinbal`
     - The `-it` instructs Docker to allocate a pseudo-TTY connected to the container’s stdin; creating an interactive bash shell in the container
     - The `--entrypoint` overwrites the default ENTRYPOINT of the image and opens shell when the container boots up.
 - Once the container boots up, add your credentials to the AWS CLI by executing `aws configure`.
 - If you already have a cluster deployed or want to configure kubectl with your newly created cluster - run `aws eks update-kubeconfig --name <CLUSTER_NAME>`
 
-## Core Deployments
-### EKS Cluster
+## Core Deployments <a name="coredeployments"></a>
+### EKS Cluster <a name="ekscluster"></a>
 **To deploy:**
 - run `sh /bin/core/EKS/deploy.sh`
 **Resources created:**
@@ -40,7 +56,7 @@ Find more about Kubernetes control plane and worker node components at [https://
 1. Run `kubectl get pods -A` to see all of the running pods that have been deployed
 2. Run `kubectl get ingress` to see all of the public addresses of the services
 
-### Dashboard
+### Dashboard <a name="dashboard"></a>
 **To deploy:**
 - run `sh /bin/core/dashboard/deploy.sh`
 **Resources created:**
@@ -48,15 +64,15 @@ Find more about Kubernetes control plane and worker node components at [https://
 **Verify deployment**
 1. Copy the token from stdout and open ‘http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login’. Paste your token for authentication when required on the dashboard.
 
-## Plugin Deployments
-### Application Load Balancer (ALB) Ingress Controller
+## Plugin Deployments <a name="plugindeployments"></a>
+### Application Load Balancer (ALB) Ingress Controller <a name="albdeployment"></a>
 **To deploy:**
 - run `sh /bin/core/plugins/ALB-Ingress-Controller/deploy.sh`
 **Resources created:**
 - An AWS Application Load Balancer with the necessary rules and listeners pre-configured.
 - An ALB ingress controller that allows the Kubernetes cluster to interact with and control the ALB resource.
 
-### API-Gateway Ingress Controller
+### API-Gateway Ingress Controller <a name="apigwdeployment"></a>
 **To deploy:**
 - run `sh /bin/core/plugins/API-Gateway-Ingress-Controller/deploy.sh`
 **Resources created:**
@@ -67,19 +83,19 @@ Find more about Kubernetes control plane and worker node components at [https://
 1. Open API Gateway portal on AWS Console and confirm that the APIs have been deployed
 2. Explore a created API and copy it's endpoints. Poll the endpoints using Postman / Insomnia etc...
 
-### Kong Gateway
+### Kong Gateway <a name="konggateway"></a>
 **To deploy:**
 - run `sh /bin/core/plugins/Kong-Gateway/deploy.sh`
 
-### Fargate Profile
+### Fargate Profile <a name="fargateprofile"></a>
 **To deploy:**
 - run `sh /bin/core/plugins/Fargate-profile/deploy.sh`
 
-### Istio
+### Istio <a name="istio"></a>
 **To deploy:**
 - run `sh /bin/core/plugins/Istio/deploy.sh`
 
-## Teardown
+## Teardown <a name="teardown"></a>
 **Note**
 - Please follow these steps before destroying the infrastructure with Terraform
 1. ⚠️ Delete the ingresses first. Run `kubectl get ingress -A` to list and then `kubectl delete ingress <INGRESS_NAME>` to delete the created ingresses.
@@ -89,7 +105,7 @@ Find more about Kubernetes control plane and worker node components at [https://
 Verify that no ingresses, deployments, services or charts exist before running the following command ⚠️
 5. Teardown the infrastructure by running `terraform destroy`
 
-## Useful Commands
+## Useful Commands <a name="usefulcommands"></a>
 - Configure kubectl to interact with your Kubernetes cluster `aws eks update-kubeconfig --name <CLUSTER_NAME>`
 - View a list of running nodes or pods - `kubectl get pods `
 - Inspect a resource - `kubectl describe RESOURCE_NAME`
