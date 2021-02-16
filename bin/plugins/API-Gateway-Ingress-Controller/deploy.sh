@@ -4,7 +4,7 @@ export CLUSTER_NAME=$clustername
 
 # Configure helm access with RBAC
 echo "Configuring Helm"
-cd ../../../lib
+cd $(cd $(dirname "$1");pwd)/$(basename "$1")/lib
 kubectl apply -f helm-rbac.yaml
 sleep 5
 helm init --service-account tiller
@@ -16,10 +16,6 @@ helm install --set rbac.create=true --set host.iptables=true --set host.interfac
 sleep 5
 
 # Deploy API Gateway Ingress Controller Chart
-cd ./AmazonAPIGWHelmChart
-# Modify YAML file with cluster name using yq
-
-
 echo "Deploying API Gateway Ingress Controller Chart"
-helm install --debug ./amazon-apigateway-ingress-controller --set image.repository="karthikk296d/aws-apigw-ingress-controller"
+helm install --debug $(cd $(dirname "$1");pwd)/$(basename "$1")/lib/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller --set image.repository="karthikk296d/aws-apigw-ingress-controller"
 sleep 5
