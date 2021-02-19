@@ -67,7 +67,7 @@ Find more about Kubernetes control plane and worker node components at [https://
 ## Plugin Deployments <a name="plugindeployments"></a>
 ### Application Load Balancer (ALB) Ingress Controller <a name="albdeployment"></a>
 **To deploy:**
-- run `sh ./bin/core/plugins/ALB-Ingress-Controller/deploy.sh`
+- run `sh ./bin/plugins/ALB-Ingress-Controller/deploy.sh`
 **Resources created:**
 - An AWS Application Load Balancer with the necessary rules and listeners pre-configured.
 - An ALB ingress controller that allows the Kubernetes cluster to interact with and control the ALB resource.
@@ -75,7 +75,7 @@ Find more about Kubernetes control plane and worker node components at [https://
 ### API-Gateway Ingress Controller <a name="apigwdeployment"></a>
 **To deploy:**
 - ⚠️ Open `./lib/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller/templates/statefulset.yaml` and rename the `spec.template.metadata.annotations.iam.amazonaws.com/role` to `<CLUSTER-NAME>-kube2iam-ingress-role` with the name of the cluster that you created.
-- run `sh ./bin/core/plugins/API-Gateway-Ingress-Controller/deploy.sh`
+- run `sh ./bin/plugins/API-Gateway-Ingress-Controller/deploy.sh`
 **Resources created:**
 - An API deployed onto API-Gateway.
 - An API-Gateway ingress controller so that traffic from the internet can be correctly routed to the microservices running inside the pod. Every service is configured as an API and is managed using AWS API-Gateway.
@@ -86,15 +86,15 @@ Find more about Kubernetes control plane and worker node components at [https://
 
 ### Kong Gateway <a name="konggateway"></a>
 **To deploy:**
-- run `sh ./bin/core/plugins/Kong-Gateway/deploy.sh`
+- run `sh ./bin/plugins/Kong-Gateway/deploy.sh`
 
 ### Fargate Profile <a name="fargateprofile"></a>
 **To deploy:**
-- run `sh ./bin/core/plugins/Fargate-profile/deploy.sh`
+- run `sh ./bin/plugins/Fargate-profile/deploy.sh`
 
 ### Istio <a name="istio"></a>
 **To deploy:**
-- run `sh ./bin/core/plugins/Istio/deploy.sh`
+- run `sh ./bin/plugins/Istio/deploy.sh`
 
 ## Teardown <a name="teardown"></a>
 **Note**
