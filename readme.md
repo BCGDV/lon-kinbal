@@ -19,7 +19,7 @@
 Kinbal allows you to deploy a production-grade EKS cluster on AWS in 15 mins or less. 🚀🐳
 
 ## Important Notes <a name="importantnotes"></a>
-- You must deploy the core EKS cluster by executing `/bin/core/eks.sh` first before adding the plugins.
+- You must deploy the core EKS cluster by executing `sh ./bin/core/EKS/deploy.sh` first before adding the plugins.
 - You can edit / add / remove the microservices as you wish. For local code changes to propagate to the cluster, you will need to:
     - Rebuild the image e.g. `docker build -t ppanchal97/service1 .`
     - Push the image up to Docker Hub e.g. `docker push ppanchal97/service1`
@@ -38,7 +38,8 @@ Kinbal allows you to deploy a production-grade EKS cluster on AWS in 15 mins or 
     - The `-it` instructs Docker to allocate a pseudo-TTY connected to the container’s stdin; creating an interactive bash shell in the container
     - The `--entrypoint` overwrites the default ENTRYPOINT of the image and opens shell when the container boots up.
 - Once the container boots up, add your credentials to the AWS CLI by executing `aws configure`.
-- If you already have a cluster deployed or want to configure kubectl with your newly created cluster - run `aws eks update-kubeconfig --name <CLUSTER_NAME>`
+- Deploy the core cluster by executing `sh ./bin/core/EKS/deploy.sh`
+- Configure kubectl with your newly created cluster - run `aws eks update-kubeconfig --name <CLUSTER_NAME>`
 
 ## Core Deployments <a name="coredeployments"></a>
 ### EKS Cluster <a name="ekscluster"></a>
@@ -65,16 +66,9 @@ Find more about Kubernetes control plane and worker node components at [https://
 1. Copy the token from stdout and open ‘http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login’. Paste your token for authentication when required on the dashboard.
 
 ## Plugin Deployments <a name="plugindeployments"></a>
-### Application Load Balancer (ALB) Ingress Controller <a name="albdeployment"></a>
-**To deploy:**
-- run `sh ./bin/plugins/ALB-Ingress-Controller/deploy.sh`
-**Resources created:**
-- An AWS Application Load Balancer with the necessary rules and listeners pre-configured.
-- An ALB ingress controller that allows the Kubernetes cluster to interact with and control the ALB resource.
-
 ### API-Gateway Ingress Controller <a name="apigwdeployment"></a>
 **To deploy:**
-- ⚠️ Open `./lib/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller/templates/statefulset.yaml` and rename the `spec.template.metadata.annotations.iam.amazonaws.com/role` to `<CLUSTER-NAME>-kube2iam-ingress-role` with the name of the cluster that you created.
+- ⚠️ Execute `nano ./bin/plugins/API-Gateway-Ingress-Controller/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller/templates/statefulset.yaml` and rename the `spec.template.metadata.annotations.iam.amazonaws.com/role` to `<CLUSTER-NAME>-kube2iam-ingress-role` with the name of the cluster that you created.
 - run `sh ./bin/plugins/API-Gateway-Ingress-Controller/deploy.sh`
 **Resources created:**
 - An API deployed onto API-Gateway.
@@ -83,6 +77,13 @@ Find more about Kubernetes control plane and worker node components at [https://
 **Verify deployment**
 1. Open API Gateway portal on AWS Console and confirm that the APIs have been deployed
 2. Explore a created API and copy it's endpoints. Poll the endpoints using Postman / Insomnia etc...
+
+### Application Load Balancer (ALB) Ingress Controller <a name="albdeployment"></a>
+**To deploy:**
+- run `sh ./bin/plugins/ALB-Ingress-Controller/deploy.sh`
+**Resources created:**
+- An AWS Application Load Balancer with the necessary rules and listeners pre-configured.
+- An ALB ingress controller that allows the Kubernetes cluster to interact with and control the ALB resource.
 
 ### Kong Gateway <a name="konggateway"></a>
 **To deploy:**

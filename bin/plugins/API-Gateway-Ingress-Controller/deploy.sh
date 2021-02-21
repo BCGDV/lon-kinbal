@@ -1,10 +1,6 @@
-# Take cluster name from user and store as temporary env var
-read -p "Enter Cluster Name: " clustername
-export CLUSTER_NAME=$clustername
-
 # Configure helm access with RBAC
 echo "Configuring Helm"
-kubectl apply -f ./helm-rbac.yaml
+kubectl apply -f $(cd $(dirname "$1");pwd)/$(basename "$1")/bin/plugins/API-Gateway-Ingress-Controller/helm-rbac.yaml
 sleep 5
 helm init --service-account tiller
 sleep 10
@@ -16,5 +12,5 @@ sleep 5
 
 # Deploy API Gateway Ingress Controller Chart
 echo "Deploying API Gateway Ingress Controller Chart"
-helm install --debug ./AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller --set image.repository="karthikk296d/aws-apigw-ingress-controller"
+helm install --debug $(cd $(dirname "$1");pwd)/$(basename "$1")/bin/plugins/API-Gateway-Ingress-Controller/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller --set image.repository="karthikk296d/aws-apigw-ingress-controller"
 sleep 5
