@@ -24,9 +24,9 @@ Kinbal allows you to deploy a production-grade EKS cluster on AWS in 15 mins or 
     - Rebuild the image e.g. `docker build -t ppanchal97/service1 .`
     - Push the image up to Docker Hub e.g. `docker push ppanchal97/service1`
 - If you are using the API-Gateway ingress controller you can add / remove routes - and to propagate the changes to the API gateway and the cluster, you will need to redeploy the ingress:
-    - Get the list of ingresses using `kubctl get ingress`
-    - Delete the ingress using `kubctl delete ingress INGRESS_NAME`
-    - Redeploy the ingress using `kubctl apply -f ./api_ingress` . The ingress deployment should take ~15 minutes. You can check the progress by looking at the logs of the ingress controller pod.
+    - Get the list of ingresses using `kubectl get ingress`
+    - Delete the ingress using `kubectl delete ingress INGRESS_NAME`
+    - Redeploy the ingress using `kubectl apply -f ./api_ingress` . The ingress deployment should take ~15 minutes. You can check the progress by looking at the logs of the ingress controller pod.
 - AWS EKS is excluded from all free-tier discounts and you will be charged to run Kinbal.
 - The infrastructure can provision dev / staging / production environments but due to cost constraints, the staging / production modules have been commented out.
 
