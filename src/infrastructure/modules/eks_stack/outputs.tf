@@ -25,3 +25,18 @@ output "config_map_aws_auth" {
   description = "A kubernetes configuration to authenticate to this EKS cluster."
   value       = module.eks.config_map_aws_auth
 }
+
+output "ecr_repository_url" {
+  description = "The URL to the ECR repository"
+  value = aws_ecr_repository.microservices_ecr_repository.repository_url
+}
+
+output "ecr_access_id" {
+  description = "AWS Access Id for the IAM user who can upload Docker images to the ECR repo"
+  value = aws_iam_access_key.ci_image_builder_access.id
+}
+
+output "ecr_secret_access_key" {
+  description = "AWS Secret Access Key for the IAM user who can upload Docker images to the ECR repo"
+  value = aws_iam_access_key.ci_image_builder_access.secret
+}
