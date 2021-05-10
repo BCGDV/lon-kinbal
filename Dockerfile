@@ -1,18 +1,11 @@
-FROM alpine:3.7
+FROM alpine:3
 
-# Create custom working directory
 WORKDIR /usr/src/kinbal
 
-# Copy over all project directories
-COPY . .
+RUN apk update && \
+    apk add jq gzip nano tar git unzip wget sudo bash openssl groff less
 
-# Install core dependenciess
-RUN apk add jq gzip nano tar git unzip wget sudo bash openssl groff less
-
-# Update dependencies
-RUN apk upgrade
-
-# Install AWS CLI
+# Install AWS CLI (alpine does not have packages for AWSCLI v2)
 RUN apk --no-cache add \
     binutils \
     curl \
@@ -38,16 +31,11 @@ RUN apk --no-cache add \
     && rm glibc-bin-${GLIBC_VER}.apk \
     && rm -rf /var/cache/apk/*
 
-# Install Terraform
-RUN wget https://releases.hashicorp.com/terraform/0.14.6/terraform_0.14.6_linux_amd64.zip
-RUN unzip terraform_0.14.6_linux_amd64.zip && rm terraform_0.14.6_linux_amd64.zip
-RUN mv terraform /usr/bin/terraform
+RUN apk add terraform --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/community
+RUN apk add kubectl --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
-# Install Kubectl
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-RUN sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+RUN curl -fsSL https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | DESIRED_VERSION=v2.17.0 sh
 
-# Install Helm
-RUN curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
-RUN chmod +x get_helm.sh
-RUN ./get_helm.sh
+COPY . .
+
+ENTRYPOINT /bin/sh

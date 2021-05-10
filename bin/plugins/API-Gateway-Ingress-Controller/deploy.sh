@@ -12,5 +12,5 @@ sleep 5
 
 # Deploy API Gateway Ingress Controller Chart
 echo "Deploying API Gateway Ingress Controller Chart"
-helm install --debug $(cd $(dirname "$1");pwd)/$(basename "$1")/bin/plugins/API-Gateway-Ingress-Controller/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller --set image.repository="karthikk296d/aws-apigw-ingress-controller"
+helm install --debug $(cd $(dirname "$1");pwd)/$(basename "$1")/bin/plugins/API-Gateway-Ingress-Controller/AmazonAPIGWHelmChart/amazon-apigateway-ingress-controller --set image.repository="karthikk296d/aws-apigw-ingress-controller" --set clusterName="${CLUSTER_NAME}-${ENVIRONMENT}"
 sleep 5

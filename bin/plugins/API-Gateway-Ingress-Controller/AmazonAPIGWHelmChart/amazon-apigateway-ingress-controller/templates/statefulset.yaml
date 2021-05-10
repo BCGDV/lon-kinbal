@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        iam.amazonaws.com/role: <CLUSTER-NAME>-kube2iam-ingress-role
+        iam.amazonaws.com/role: {{ .Values.clusterName }}-kube2iam-ingress-role
       labels:
         control-plane: controller-manager
         controller-tools.k8s.io: "1.0"
