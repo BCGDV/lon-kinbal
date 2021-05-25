@@ -506,3 +506,47 @@ resource "aws_iam_role_policy" "ElasticLoadBalancingFullAccess" {
 }
   EOF
 }
+
+
+resource "aws_iam_user" "ci_image_builder" {
+  name = "${var.cluster_name}-ci-image-builder"
+}
+
+resource "aws_iam_access_key" "ci_image_builder_access" {
+  user = aws_iam_user.ci_image_builder.name
+}
+
+resource "aws_iam_user_policy" "ci_image_builder_ecr_policy" {
+  name = "ci_image_builder_ecr_policy"
+  user = aws_iam_user.ci_image_builder.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ecr:GetAuthorizationToken",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+      {
+        Action = [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:GetRepositoryPolicy",
+          "ecr:DescribeRepositories",
+          "ecr:ListImages",
+          "ecr:DescribeImages",
+          "ecr:BatchGetImage",
+          "ecr:InitiateLayerUpload",
+          "ecr:UploadLayerPart",
+          "ecr:CompleteLayerUpload",
+          "ecr:PutImage"
+        ]
+        Effect   = "Allow"
+        Resource = aws_ecr_repository.microservices_ecr_repository.arn
+      },
+    ]
+  })
+}

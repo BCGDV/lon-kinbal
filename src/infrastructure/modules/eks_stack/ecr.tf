@@ -1,4 +1,4 @@
-resource "aws_ecr_repository" "microservices-ecr-repository" {
+resource "aws_ecr_repository" "microservices_ecr_repository" {
   name                 = "${var.cluster_name}-images"
   image_tag_mutability = "MUTABLE"
 

@@ -1,5 +1,9 @@
 variable "cluster_name" {
-  default = "my-cluster"
+  type = string
+}
+
+variable "environment" {
+  type = string
 }
 
 variable "cluster_version" {
